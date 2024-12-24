@@ -9,7 +9,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchStarCount = async () => {
       try {
-        const response = await fetch('https://api.github.com/repos/0xmetaschool/TripPlannerGPT');
+        const response = await fetch('https://api.github.com/repos/0xmetaschool/VintageGamesGPT');
         const data = await response.json();
         setStarCount(data.stargazers_count); // Get the star count
       } catch (error) {
