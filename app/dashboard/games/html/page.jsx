@@ -159,7 +159,7 @@ export default function VintageGameGeneratorPage() {
                   value={gameRequest}
                   onChange={(e) => setGameRequest(e.target.value)}
                   className="w-full h-[350px] font-mono text-sm bg-gray-700 text-white border-2 border-gray-600"
-                  placeholder="Describe a vintage black and white game (e.g., 'tic-tac-toe', 'Space Invaders', 'Pac-Man')"
+                  placeholder="Describe a vintage black and white game (e.g., 'tic-tac-toe')"
                 />
                 <Button
                   onClick={generateGame}
