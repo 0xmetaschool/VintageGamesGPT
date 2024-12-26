@@ -125,7 +125,7 @@ export default function VintageGameGeneratorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-8 font-mono">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold text-center mb-8 text-white flex items-center justify-center gap-4">
           <Play className="text-green-500" />

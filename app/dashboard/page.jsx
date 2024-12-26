@@ -9,7 +9,6 @@ const Dashboard = () => {
       {/* Scanline and Background Effects */}
       <div className="fixed inset-0 pointer-events-none z-50">
         <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"></div>
         <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:1px_1px]"></div>
       </div>
 
@@ -80,8 +79,8 @@ const Dashboard = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center justify-center relative overflow-hidden"
             >
-              <div className="text-6xl text-gray-400 font-retro">+</div>
-              <p className="text-gray-300 mt-2 ml-2 font-retro">Create a new game</p>
+              <div className="text-6xl text-gray-400 font-retro mt-32">+</div>
+              <p className="text-gray-300 mt-2 ml-2 font-retro mb-32">Create a new game</p>
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
             </motion.div>
           </Link>

@@ -12,10 +12,10 @@ function Header() {
     }, []);
 
     return (
-        <div className='flex p-4 items-center justify-between bg-white shadow-sm'>
+        <div className='flex p-4 items-center justify-between bg-gray-950 shadow-sm'>
             {/* Logo now wrapped in Link to make it clickable */}
             <Link href="/" className='cursor-pointer'>
-                <span className='text-2xl font-bold text-black hover:text-gray-700 transition-colors'>
+                <span className='text-2xl font-bold text-gray-400 hover:text-gray-700 transition-colors'>
                     VintageGamesGPT
                 </span>
             </Link>
@@ -23,17 +23,18 @@ function Header() {
             {/* Right-aligned header Menu items */}
             <ul className='flex gap-6 ml-auto'>
                 <Link href={"/dashboard"}>
-                    <li className={`hover:text-black hover:font-bold transition-all
+                    <li className={`text-gray-400 font-bold hover:text-gray-700 hover:font-bold transition-all
                     cursor-pointer
-                    ${path == '/dashboard' && 'text-black font-bold'}
+                    ${path == '/dashboard' && 'text-gray-400 font-bold'}
                     `}
                     >Dashboard</li>
                 </Link>
                 <Link href={"/dashboard/upgrade"}>
-                    <li className={`hover:text-black hover:font-bold transition-all
+                    <li className={`text-gray-400 font-bold hover:text-gray-700 hover:font-bold transition-all
                     cursor-pointer
-                    ${path == '/dashboard/upgrade' && 'text-black font-bold'}
-                    `}>Upgrade</li>
+                    ${path == '/dashboard/upgrade' && 'text-gray-400 font-bold'}
+                    `}
+                    >Upgrade</li>
                 </Link>
             </ul>
 

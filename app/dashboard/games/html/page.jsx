@@ -136,86 +136,95 @@ export default function VintageGameGeneratorPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-8">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-8 text-white flex items-center justify-center gap-4">
-          <Play className="text-green-500" />
-          Vintage Game Generator
-          <Code className="text-blue-500" />
-        </h1>
+    <div className="min-h-screen bg-black text-gray-300 font-mono relative">
+      {/* Scanline Effect */}
+      <div className="fixed inset-0 pointer-events-none z-10">
+        <div className="absolute inset-0 bg-black opacity-20"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:1px_1px]"></div>
+      </div>
 
-        <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
-          {/* Game Request Input */}
-          <div className="w-full md:w-1/2 bg-gray-800 shadow-xl rounded-lg p-6">
-            <Card className="w-full h-full bg-gray-800 border-gray-700">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <Wand2 className="text-blue-500" />
-                  Generate Vintage Game
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Textarea
+      {/* CRT Screen Border */}
+      <div className="container mx-auto px-4 py-8 relative z-20">
+        <div className="max-w-6xl mx-auto bg-black border-8 border-gray-800 rounded-lg p-8 shadow-[0_0_15px_rgba(128,128,128,0.3)]">
+          {/* Title */}
+          <h1 className="text-6xl font-bold text-center mb-8 tracking-wider uppercase">
+            Vintage Game Generator
+          </h1>
+
+          <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
+            {/* Game Request Input */}
+            <div className="w-full md:w-1/2">
+              <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-6 shadow-[0_0_10px_rgba(128,128,128,0.2)]">
+                <div className="mb-4 flex items-center gap-2">
+                  <Wand2 className="text-gray-500" />
+                  <h2 className="text-2xl font-bold text-gray-400">GENERATE GAME</h2>
+                </div>
+                
+                <textarea
                   value={gameRequest}
                   onChange={(e) => setGameRequest(e.target.value)}
-                  className="w-full h-[350px] font-mono text-sm bg-gray-700 text-white border-2 border-gray-600"
-                  placeholder="Describe a vintage black and white game (e.g., 'tic-tac-toe', 'Space Invaders', 'Pac-Man')"
+                  className="w-full h-[350px] bg-black text-gray-300 border-2 border-gray-700 rounded p-4 font-mono text-sm 
+                            focus:outline-none focus:border-gray-500 shadow-[0_0_10px_rgba(128,128,128,0.1)]
+                            placeholder:text-gray-600"
+                  placeholder="Describe a vintage black and white game..."
                 />
-                <Button
+                
+                <button
                   onClick={generateGame}
                   disabled={isLoading}
-                  className="mt-4 w-full bg-gray-600 hover:bg-gray-700 text-white"
+                  className="mt-4 w-full py-3 bg-gray-800 text-gray-300 border-2 border-gray-700 
+                           rounded hover:bg-gray-700 transition-colors uppercase tracking-wider
+                           shadow-[0_0_10px_rgba(128,128,128,0.2)]"
                 >
                   {isLoading ? (
-                    <span className="flex items-center gap-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-                      Generating...
+                    <span className="flex items-center justify-center gap-2">
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-gray-300 border-t-transparent"></div>
+                      GENERATING...
                     </span>
                   ) : (
-                    'Generate Game'
+                    'GENERATE GAME'
                   )}
-                </Button>
+                </button>
+
                 {error && (
-                  <div className="mt-4 p-4 bg-red-500 border border-red-600 rounded-md">
-                    <p className="text-white text-sm">{error}</p>
+                  <div className="mt-4 p-4 bg-gray-800 border-2 border-gray-600 rounded">
+                    <p className="text-gray-300 text-sm">{error}</p>
                   </div>
                 )}
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </div>
 
-          {/* Generated Game Display */}
-          <div className="w-full md:w-1/2 bg-gray-800 shadow-xl rounded-lg p-6">
-            <Card className="w-full h-full bg-gray-800 border-gray-700">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <Play className="text-green-500" />
-                  Game Preview
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="border-4 border-gray-700 rounded-md shadow-md p-4 min-h-[400px] bg-gray-800">
+            {/* Game Preview */}
+            <div className="w-full md:w-1/2">
+              <div className="bg-gray-900 border-2 border-gray-700 rounded-lg p-6 shadow-[0_0_10px_rgba(128,128,128,0.2)]">
+                <div className="mb-4 flex items-center gap-2">
+                  <Play className="text-gray-500" />
+                  <h2 className="text-2xl font-bold text-gray-400">GAME PREVIEW</h2>
+                </div>
+
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-800/5 to-transparent pointer-events-none"></div>
                   <iframe
                     ref={iframeRef}
-                    className="w-full h-[400px] bg-gray-700"
+                    className="w-full h-[400px] bg-black border-4 border-gray-800 rounded 
+                             shadow-[0_0_15px_rgba(128,128,128,0.2)]"
                     sandbox="allow-scripts allow-same-origin"
                     title="Game Preview"
                   />
                 </div>
-                
+
                 {generatedCode && (
-                  <div className="flex flex-col space-y-2 mt-4">
-                    <Button
-                      onClick={copyCode}
-                      variant="outline"
-                      className="w-full border-gray-600 text-black hover:bg-gray-700"
-                    >
-                      Copy Game Code
-                    </Button>
-                  </div>
+                  <button
+                    onClick={copyCode}
+                    className="mt-4 w-full py-3 bg-gray-800 text-gray-300 border-2 border-gray-700 
+                             rounded hover:bg-gray-700 transition-colors uppercase tracking-wider
+                             shadow-[0_0_10px_rgba(128,128,128,0.2)]"
+                  >
+                    COPY GAME CODE
+                  </button>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>

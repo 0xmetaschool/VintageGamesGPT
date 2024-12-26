@@ -76,7 +76,6 @@ const VintageGamesLanding = () => {
       {/* Scanline and Background Effects */}
       <div className="fixed inset-0 pointer-events-none z-50">
         <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50"></div>
         <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:1px_1px]"></div>
       </div>
 

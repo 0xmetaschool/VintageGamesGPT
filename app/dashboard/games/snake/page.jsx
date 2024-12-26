@@ -132,7 +132,7 @@ const initGame = () => {
 
       // Draw snake head
       const head = snake[0];
-      ctx.fillStyle = 'black';
+      ctx.fillStyle = 'brown';
       ctx.beginPath();
       ctx.arc(head.x + gridSize / 2, head.y + gridSize / 2, gridSize / 2, 0, Math.PI * 2);
       ctx.fill();
@@ -284,102 +284,104 @@ const initGame = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-black text-white font-mono relative">
+      {/* Scanline Effect */}
+      <div className="fixed inset-0 pointer-events-none z-10">
+        <div className="absolute inset-0 bg-black opacity-20"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:1px_1px]"></div>
+      </div>
+
+      {/* CRT Screen Border */}
+      <div className="container mx-auto px-4 py-8 relative z-20">
+        <div className="max-w-6xl mx-auto bg-black border-t-8 border-l-8 border-r-8 border-b-8 border-gray-800 rounded-lg p-8 shadow-[0_0_15px_rgba(0,255,0,0.3)]">
         <h1 className="text-4xl font-bold text-center mb-8 text-white flex items-center justify-center gap-4">
-          <Play className="text-green-500" />
+          <Play className="text-gray-500" />
           Snake Game
-          <Code className="text-blue-500" />
+          <Code className="text-gray-500" />
         </h1>
 
-        <div className="flex space-x-6">
-          {/* Game Container */}
-          <div className={`${showCode ? 'w-1/2' : 'w-full'} bg-gray-800 shadow-xl rounded-lg p-6 transition-all duration-300`}>
-            <div className="flex flex-col items-center">
-              <canvas 
-                ref={canvasRef} 
-                width={canvasSize} 
-                height={canvasSize} 
-                className="border-4 border-gray-700 rounded-md shadow-md"
-              ></canvas>
-              
-              <div className="mt-4 flex items-center space-x-4 pt-5">
-                <p className="text-xl font-semibold">Score: 
-                  <span className="text-gray-400 ml-2">{score}</span>
-                </p>
-                
-                {gameOver && (
-                  <Button 
-                    onClick={defaultInitGame}
-                    variant="outline"
-                    className="bg-gray-600 text-white hover:bg-gray-700"
-                  >
-                    Play Again
-                  </Button>
-                )}
+          <div className="flex space-x-6">
+            {/* Game Container */}
+            <div className={`${showCode ? 'w-1/2' : 'w-full'} transition-all duration-300`}>
+              <div className="flex flex-col items-center">
+                {/* Game Canvas with CRT Effect */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-500/5 to-transparent pointer-events-none"></div>
+                  <canvas 
+                    ref={canvasRef} 
+                    width={canvasSize} 
+                    height={canvasSize} 
+                    className="border-4 border-gray-800 rounded-md shadow-[0_0_20px_rgba(0,255,0,0.2)]"
+                  />
+                </div>
 
-                <Button 
-                  onClick={toggleCodeView} 
-                  variant="outline"
-                  className="ml-4 bg-gray-600 text-white hover:bg-gray-700"
-                >
-                  {showCode ? 'Hide Code' : 'Show Code'}
-                </Button>
+                {/* Score Display */}
+                <div className="mt-6 bg-black border-2 border-gray-800 p-4 rounded-lg w-full max-w-xs">
+                  <p className="text-2xl font-bold text-gray-500 text-center tracking-widest">
+                    SCORE: {score}
+                  </p>
+                </div>
+
+                {/* Control Buttons */}
+                <div className="mt-4 flex gap-4">
+                  {gameOver && (
+                    <button 
+                      onClick={defaultInitGame}
+                      className="px-6 py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors shadow-[0_0_10px_rgba(0,255,0,0.3)]"
+                    >
+                      RESTART
+                    </button>
+                  )}
+                  <button 
+                    onClick={toggleCodeView}
+                    className="px-6 py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors shadow-[0_0_10px_rgba(0,0,255,0.3)]"
+                  >
+                    {showCode ? 'HIDE CODE' : 'SHOW CODE'}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Code Editor Container */}
-          {showCode && (
-            <div className="w-1/2 bg-gray-800 shadow-xl rounded-lg p-6">
-              <Card className="w-full h-full bg-gray-800 border-gray-700">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-white">
-                    <Code className="text-blue-500" />
-                    Game Code
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Textarea
-                    value={editableCode}
-                    onChange={(e) => setEditableCode(e.target.value)}
-                    className="w-full h-[350px] font-mono text-sm bg-gray-700 text-white border-2 border-gray-600"
-                    placeholder="Edit your game code here"
-                  />
-                  
-                  {/* Apply Code Changes Button */}
-                  <Button 
+            {/* Code Editor with Retro Style */}
+            {showCode && (
+              <div className="w-1/2 bg-gray-900 border-2 border-gray-500 rounded-lg p-6 shadow-[0_0_15px_rgba(0,0,255,0.2)]">
+                <div className="mb-4 flex items-center gap-2">
+                  <Code className="text-gray-500" />
+                  <h2 className="text-2xl font-bold text-gray-500">GAME CODE</h2>
+                </div>
+                <textarea
+                  value={editableCode}
+                  onChange={(e) => setEditableCode(e.target.value)}
+                  className="w-full h-[350px] bg-black text-gray-500 border-2 border-gray-500 rounded p-4 font-mono text-sm focus:outline-none focus:border-gray-400 shadow-[0_0_10px_rgba(0,255,0,0.2)]"
+                  placeholder="Edit your game code here..."
+                />
+                <div className="mt-4 space-y-4 text-bold ">
+                  <button 
                     onClick={applyCodeChanges}
-                    className="mt-4 w-full bg-gray-600 hover:bg-gray-700 text-white"
+                    className="w-full py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors"
                   >
-                    Apply Code Changes
-                  </Button>
-
-                  {/* AI Code Suggestion Section */}
-                  <div className="mt-4 flex space-x-2">
-                    <Input 
+                    APPLY CHANGES
+                  </button>
+                  <div className="flex gap-2">
+                    <input 
                       value={aiPrompt}
                       onChange={(e) => setAiPrompt(e.target.value)}
-                      placeholder="Ask AI to modify the game code"
-                      className="flex-grow bg-gray-700 text-white border-2 border-gray-600"
+                      placeholder="Ask AI to modify the game..."
+                      className="flex-grow bg-black text-gray-500 border-2 border-gray-500 rounded px-4 py-2"
                     />
-                    <Button 
+                    <button 
                       onClick={getAiSuggestion}
                       disabled={isLoading}
-                      className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white"
+                      className="px-4 py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors flex items-center gap-2"
                     >
-                      {isLoading ? 'Generating...' : (
-                        <>
-                          <Wand2 className="w-4 h-4" />
-                          Suggest
-                        </>
-                      )}
-                    </Button>
+                      <Wand2 className="w-4 h-4" />
+                      {isLoading ? 'Generating ...' : 'SUGGEST'}
+                    </button>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
